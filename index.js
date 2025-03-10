@@ -1,4 +1,3 @@
-```json
 {
   "name": "media-ai-editor",
   "version": "0.1.0",
@@ -19,4 +18,3 @@
     "vite": "^4.3.9"
   }
 }
-```

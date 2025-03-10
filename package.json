@@ -1,6 +1,5 @@
-
 {
-  "name": "Media-Ai",
+  "name": "media-ai-editor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,7 +7,7 @@
     "react-dom": "^18.2.0",
     "lucide-react": "^0.263.1",
     "tailwindcss": "^3.3.0"
-  },ll
+  },
   "scripts": {
     "start": "vite",
     "build": "vite build",

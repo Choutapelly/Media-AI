@@ -1,5 +1,5 @@
 {
-  "name": "media-ai-editor",
+  "name": "Media-Ai",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

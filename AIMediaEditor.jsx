@@ -251,3 +251,75 @@ const AIMediaEditor = () => {
 
 export default AIMediaEditor;
 ```
+
+```javascript
+// Add this import at the top
+import { enhanceImage, enhanceVideo, checkVideoJobStatus } from './aiService';
+
+// Then update the processAICommand function:
+const processAICommand = async () => {
+  if (!aiCommand.trim()) return;
+  
+  setIsProcessing(true);
+  
+  try {
+    let result;
+    
+    if (mediaType === 'image') {
+      result = await enhanceImage(mediaFile, aiCommand);
+      // Create object URL from the result blob
+      const resultUrl = URL.createObjectURL(result);
+      
+      // Add the edit to history
+      const newEdit = {
+        command: aiCommand,
+        timestamp: new Date().toISOString(),
+        preview: resultUrl
+      };
+      
+      // Update history
+      const newHistory = editHistory.slice(0, currentHistoryIndex + 1);
+      newHistory.push(newEdit);
+      
+      setEditHistory(newHistory);
+      setCurrentHistoryIndex(newHistory.length - 1);
+    } else {
+      // For video, start the job and show progress
+      const jobId = await enhanceVideo(mediaFile, aiCommand);
+      
+      // You would implement polling logic here
+      // This is simplified
+      const checkStatus = setInterval(async () => {
+        const status = await checkVideoJobStatus(jobId);
+        
+        if (status.complete) {
+          clearInterval(checkStatus);
+          
+          // Add to history when complete
+          const newEdit = {
+            command: aiCommand,
+            timestamp: new Date().toISOString(),
+            preview: status.resultUrl
+          };
+          
+          const newHistory = editHistory.slice(0, currentHistoryIndex + 1);
+          newHistory.push(newEdit);
+          
+          setEditHistory(newHistory);
+          setCurrentHistoryIndex(newHistory.length - 1);
+          setIsProcessing(false);
+        }
+      }, 2000);
+    }
+  } catch (error) {
+    console.error("Error processing media:", error);
+    alert("There was an error processing your request.");
+  }
+  
+  setIsProcessing(false);
+  setAiCommand('');
+  
+  // Generate new AI suggestions
+  generateSuggestions();
+};
+```

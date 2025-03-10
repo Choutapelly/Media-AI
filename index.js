@@ -1,20 +1,22 @@
-``javascript
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import AIMediaEditor from './AIMediaEditor';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <AIMediaEditor />
-  </React.StrictMode>
-);
-```
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <AIMediaEditor />
-  </React.StrictMode>
-);
+```json
+{
+  "name": "media-ai-editor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.263.1",
+    "tailwindcss": "^3.3.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.3.9"
+  }
+}
 ```
